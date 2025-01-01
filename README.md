@@ -9,6 +9,11 @@ CircuitZilla is a fully functional NE555 timer IC designed using discrete compon
    - [Components](#components)
    - [Pinout Description](#pinout-description)
 4. [How It Works](#how-it-works)
+   - [Voltage Divider](#voltage-divider)
+   - [Comparators](#comparators)
+   - [Flip-Flop](#flip-flop)
+   - [Output Stage](#output-stage)
+   - [Discharge Mechanism](#discharge-mechanism)
 5. [Assembly Instructions](#assembly-instructions)
 6. [Usage](#usage)
 7. [Example Configurations](#example-configurations)
@@ -56,11 +61,39 @@ CircuitZilla is a fully functional NE555 timer IC designed using discrete compon
 ---
 
 ## How It Works
-1. **Voltage Divider**: Resistors R1, R2, and R3 create a voltage divider that sets reference levels for comparison.
-2. **Comparators**: Q1-Q8 act as comparators to monitor the trigger and threshold voltages.
-3. **Flip-Flop**: Q9-Q12 form a bistable flip-flop that toggles the output state.
-4. **Output Stage**: Transistors Q13-Q25 amplify and stabilize the output signal.
-5. **Discharge Mechanism**: Q24 discharges the timing capacitor when necessary.
+The internal operation of CircuitZilla mimics the NE555 timer's functionality through the interaction of multiple sub-circuits:
+
+### Voltage Divider
+- **Purpose**: Establishes two reference voltages, typically at 1/3 and 2/3 of the supply voltage (Vcc).
+- **Components**: Resistors R1, R2, and R3 create this divider.
+- **Function**: Provides reference levels for the comparators to evaluate the input signals.
+
+### Comparators
+- **Purpose**: Monitor the voltages on the Trigger and Threshold pins.
+- **Components**: Transistors Q1-Q8 form two comparators.
+- **Operation**:
+  - The Trigger pin activates the lower comparator when its voltage drops below 1/3 Vcc, setting the flip-flop.
+  - The Threshold pin activates the upper comparator when its voltage exceeds 2/3 Vcc, resetting the flip-flop.
+
+### Flip-Flop
+- **Purpose**: Stores the output state based on the comparator inputs.
+- **Components**: Transistors Q9-Q12.
+- **Operation**:
+  - A Set signal from the lower comparator flips the output to high.
+  - A Reset signal from the upper comparator flips the output to low.
+
+### Output Stage
+- **Purpose**: Amplifies the flip-flop's output and drives the connected load.
+- **Components**: Transistors Q13-Q25 form the output stage.
+- **Operation**:
+  - Produces a high or low output signal depending on the flip-flop's state.
+  - Designed to drive both small and medium loads efficiently.
+
+### Discharge Mechanism
+- **Purpose**: Controls the discharge of the timing capacitor to reset the cycle.
+- **Components**: Transistor Q24.
+- **Operation**:
+  - When the flip-flop's state changes, Q24 connects the Discharge pin to ground, emptying the capacitor.
 
 ---
 
