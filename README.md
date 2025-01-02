@@ -1,5 +1,5 @@
 # CircuitZilla: Discrete NE555 Timer IC
-![Circuitzilla 555 logo](https://github.com/user-attachments/assets/eb718c6a-208e-4b70-a068-7d641fb2bf42)
+
 CircuitZilla is a fully functional NE555 timer IC designed using discrete components such as transistors, resistors, and capacitors. This project replicates the operation of a standard 555 timer IC, offering insight into its internal design while allowing for customization and experimentation.
 
 ## Table of Contents
